@@ -139,41 +139,46 @@
 
     <section title="Terminology">
       <t><list hangIndent="22" style="hanging">
-	<t hangText="4rd domain (Domain):">A set of 4rd CEs and BRs
-	connected to the same virtual 4rd link. A service provider may
-	deploy 4rd with a single 4rd domain, or may utilize multiple
-	4rd domains. Each domain requires a separate 4rd prefix.</t>
+	<t hangText="4via6 domain (Domain):">A set of 4via6 CEs or Hosts and BRs
+	connected to the same virtual link. A service provider may
+	deploy 4rd with a single 4via6 domain, or may utilize multiple
+	4via6 domains. Each domain requires a separate 4via6 prefix.</t>
 
-	<t hangText="4rd Border Relay (BR):">A 4rd-enabled router
-	managed by the service provider at the edge of a 4rd domain.
-	A Border Relay router has at least one of each of the
-	following: an IPv6-enabled interface, a 4rd virtual interface
-	acting as an endpoint for the 4rd IPv4 in IPv6 tunnel, and an
-	IPv4 interface connected to the native IPv4 network. A 4rd BR
+	<t hangText="4via6 Border Relay (BR):">A 4rd-enabled router
+	managed by the service provider at the edge of a 4via6 domain.
+	A Border Relay router has at least an IPv6-enabled interface and an
+	IPv4 interface connected to the native IPv4 network. A 4via6 BR
 	may also be referred to simply as a "BR" within the context of
-	4rd.</t>
+	4via6.</t>
 
-	<t hangText="4rd Customer Edge (CE):">A device functioning as
-	a Customer Edge router in a 4rd deployment. In a residential
+	<t hangText="4via6 Customer Edge (CE):">A device functioning as
+	a Customer Edge router in a 4via6 deployment. In a residential
 	broadband deployment, this type of device is sometimes
 	referred to as a "Residential Gateway" (RG) or "Customer
-	Premises Equipment" (CPE). A typical 4rd CE serving a
-	residential site has one WAN side interface, one or more LAN
-	side interfaces, and a 4rd virtual interface. A 4rd CE may
+	Premises Equipment" (CPE). A typical 4via6 CE adopting 4rd rules will serve a
+	residential site with one WAN side interface, one or more LAN
+	side interfaces. A 4via6 CE may
 	also be referred to simply as a "CE" within the context of
-	4rd.</t>
+	4via6.</t>
+	
+        <t hangText="4via6 Hosts:">A device functioning as
+	a mobile terminal in a 4via6 wireless network deployment. 4via6 hosts will 
+        perform stateless translation based on 4rd algorithm. A 4via6 host has at least
+        an IPv6-enabled interface. An derived IPv4 address might be fed into installed 
+        IPv4 application. A 4via6 host may also be referred to simply as a "Host" within 
+        the context of 4via6.</t>
 
-        <t hangText="CE IPv6 prefix:">The IPv6 prefix assigned to a CE by
+        <t hangText="4via6 IPv6 prefix:">The IPv6 prefix assigned to a CE or hosts by
 	other means than 4rd itself, and used by 4rd to derive a CE 4rd
 	prefix.</t>
 
-        <t hangText="CE IPv6 address:">The IPv6 address given to the
-        CE as part of normal IPv6 Internet access. This address is
-        used by a 4rd CE to create the 4rd prefix as well as to send
+        <t hangText="4via6 IPv6 address:">The IPv6 address given to the
+        CE or hosts as part of normal IPv6 Internet access. This address is
+        used by a CE or hosts to create the 4rd prefix as well as to send
         and receive IPv6-encapsulated IPv4 packets.</t>
 
-        <t hangText="CE 4rd prefix:">The 4rd prefix of the CE. It is
-        derived from the CE IPv6 prefix by a mapping rule according to
+        <t hangText="4rd prefix:">The 4rd prefix of the CE or hosts. It is
+        derived from the CE or hosts IPv6 prefix by a mapping rule according to
         <xref target="mapping-rules"></xref>. Depending on its length,
         it is an IPv4 prefix, an IPv4 address, or a shared IPv4
         address followed by a Port-set ID (<xref
@@ -186,10 +191,10 @@
         can comprise up to 4 disjoint port ranges.</t>
 
         <t hangText="Domain IPv6 prefix:">An IPv6 prefix assigned by an ISP to
-	a 4rd domain.</t>
+	a 4via6 domain.</t>
 
-        <t hangText="Domain IPv4 prefix:">A 4rd prefix assigned by an
-        ISP to the 4rd domain.</t>
+        <t hangText="Domain IPv4 prefix:">A IPv4 prefix assigned by an
+        ISP to the 4via6 domain.</t>
 
         <t hangText="IPv4 Embedded Address (EA) bits:">The IPv4
         EA-bits in the IPv6 address identify an IPv4 prefix, IPv4
@@ -198,6 +203,13 @@
 	<t hangText="Shared IPv4 address:">An IPv4 address that is
 	shared among multiple nodes. Each node has a separate part of
 	the transport layer port space.</t>
+
+         <t hangText="IPv6 mapping prefix :"> An IPv6 mapping prefix should
+         be delivered to 4via6 CEs or hosts for generating IPv6 address by 
+         catenating IPv4 destination address with IPv6 mapping prefix. Such 
+         IPv6 mapping prefix would be either the "Well-Known Prefix" or a 
+         "Network-Specific Prefix" unique to the organization deploying the
+         address translators. It will help to route packages to appropriate BR.</t>
       </list></t>
     </section>
 
@@ -275,13 +287,23 @@
       <xref target="I-D.despres-softwire-4rd"></xref>. Instead, this draft is
       using the stateless network address translation such as
       <xref target="RFC6052"></xref> and
-      <xref target="I-D.ietf-behave-v6v4-xlate"></xref>.</t>
+      <xref target="I-D.ietf-behave-v6v4-xlate"></xref>.Differing from tunneling model,
+      translation approach doesn't need to know BR IPv6 address. Instead of that, 
+      a IPv6 mapping prefix should be delivered to 4via6 CPEs or 4via6 hosts for generating
+      IPv6 address by catenating IPv4 destination address with IPv6 mapping prefix. Such 
+      IPv6 mapping prefix shall be either the "Well-Known Prefix" or a "Network-Specific 
+       Prefix" unique to the organization deploying the address translators.</t>
 
       <section anchor="ipv4-address-port" title="IPv4 address and port">
-        <t>Each end-user device generates an IPv4 address or an IPv4 address and
-        a port-range from an IPv6 prefix assigned from SP's network. This must be
-        done with the same rule defined in
-        <xref target="I-D.despres-softwire-4rd"></xref>. 
+        <t>Before data flows are initiated, several stateless mapping rules should be
+        set on 4via6 CPE or 4via6 hosts. 4via6 hosts or 4via6 CPE can acquire these 
+        parameters in various ways, such as manual configuration by an administrator, 
+        a new DHCPv6 option, etc. Each end-user device generates an IPv4 address or an
+        IPv4 address and a port-range from an IPv6 prefix assigned from SP's network. 
+        This must be done with the same rule defined in
+        <xref target="I-D.despres-softwire-4rd">.</xref>. 
+        In addition, 4via6 border router
+        should also maintain stateless rule synchronized with 4via6 CPE or 4via6 hosts.
       </section>
 
       <section anchor="address-mapping-rule" title="Address mapping rule">
@@ -293,15 +315,9 @@
         <xref target="I-D.despres-softwire-4rd"></xref>.</t>
       </section>
 
-      <section anchor="packet-forwarding" title="Packet Forwarding">
-        <t>The only difference from 
-        <xref target="I-D.despres-softwire-4rd"></xref> is the forwarding mechanism.
-        <xref target="I-D.despres-softwire-4rd"></xref> uses the automatic tunneling
-        mechanism across IPv6 network infrastructure. This solution uses the stateless
-        network address translation such as
-        <xref target="RFC6052"></xref> and
-        <xref target="I-D.ietf-behave-v6v4-xlate"></xref>.</t>
-
+      <section title="Operations of 4via6 Stateless Translation ">
+      <section anchor="packet-forwarding" title="Packet Forwarding on 4via6 CE ">
+ 
         <t>A 4via6 CE that receives IPv4 packets from CE LAN side checks the validity
         of its source and destination address. It also checks that the packet size
         is acceptable. If yes, NAT44 changes the IPv4 source address and the source
@@ -388,6 +404,67 @@
         in 4via6 CE is still stateless. In addition, 4rd BR is completely stateless.</t>
       </section>
 
+        <section title="Operations on 4via6 Hosts">
+     
+        <t>4via6 hosts could get IPv6 prefix through SLAAC(Stateless address autoconfiguration).
+        Afterwards, the host will generate IPv6 address assigned to one of host's interfaces 
+        by concatenating IPv6 suffix which has been contained in pre-configured stateless mapping rules. 
+        Since the assigned IPv6 prefix would encode port range as a part, 4via6 host will 
+        derive shared IPv4 address with constrained port range from such IPv6 prefix 
+        according to the stateless algorithm. In order to support IPv4 application calling, 
+        the generated IPv4 address should be provided to applications. 
+        Meanwhile, port constrains should not be applied to the application, because applications
+        would expect to bind to a specific port number. Therein, only port translation functions 
+        are serving for converting normal port into constrained port range without NAT44 translation. </t> 
+    
+	<t>The below details the traffic processing for outbound and inbound data packages. </t> 
+    
+         <t>For outbound traffic operation, 4via6 hosts will intercept IPv4 socket calling or 
+        IPv4 data packages derived from IPv4 applications. Port translation is performed for 
+        source port conversion. Before implementing NAT46, the host should match IPv4 destination 
+        with pre-configured mapping rules. if IPv4 destination address falls into the domain 
+        IPv4 prefix in mapping rules, the stateless algorithm is applied to both source and
+        destination address for generating source and destination IPv6 address. 
+        After NAT46 translation, data packages would be directly to transmit to another 4via6 host. 
+        Otherwise, the stateless algorithm is only applied to source address generation. 
+        Regarding to destination address, IPv6 mapping prefix should be concatenated with 
+        IPv4 address to form a IPv4-embedded IPv6 address, in which IPv4 address is encoded 
+        in positions 96 to 127. After NAT46 translation, data packages will be sent 
+        BR for subsequential operations. </t> 
+    
+         <t>For inbound traffic operation, 4via6 hosts will receive IPv6 data packages
+         from ISP network. The host should match IPv6 source address with pre-configured 
+         mapping rules. if IPv6 source address falls into the domain IPv6 prefix in mapping 
+         rules, the stateless algorithm is applied to both source and destination address 
+         for deriving IPv4 source and destination address. Accomplishing IPv6 to IPv4 translation, 
+         the host should be capable of port translation to deliver data packages to an appropriate 
+         IPv4 application. Otherwise, the stateless algorithm is only applied to destination address.
+         Regarding to IPv6 source address, the host should simply strip IPv6 mapping prefix to extract IPv4 
+         address from positions 96 to 127. Afterwards, the host deliver data packages to internal 
+         IPv4 hosts. </t>  
+      
+        </section>   
+  
+       <section title="Operations on BR">
+     
+      <t>In order to interconnecting IPv6 network with public IPv4 Internet, BR would take
+      stateless algorithm for translating IPv6 to IPv4. </t>
+    
+      <t>The below details the traffic processing for outbound and inbound data packages. </t> 
+    
+      <t>For outbound traffic operation, 4via6 BR will receive IPv6 data packages from
+      4via6 CE. BR would generate IPv4 address and port range from source IPv6 address
+      automatically. for destination IPv6 address, a IPv6 mapping prefix will be stripped
+      to get out IPv4 address. Both source and destination address is stateless.</t> 
+    
+      <t>For inbound traffic operation, 4via6 BR will receive IPv4 data packages from IPv4
+      Internet. BR should match IPv4 destination with pre-configured mapping rules. if IPv4
+      destination address falls into the domain IPv4 prefix in mapping rules, IPv6 address
+      can be decided from IPv4 address and port statelessly. The source IPv4 address would
+      be concatenated with IPv6 mapping prefix to form a natural IPv6 source address. </t>
+      </section>
+       
+
       <section anchor="pmtu-consideration" title="PMTU Consideration">
         <t>To properly deal with the large size IPv4 datagrams that some applications
         use, in particular with UDP, precautions are needed because of the important 
@@ -415,70 +492,7 @@
 
     </section>
 
-    <section title="Operations of 4via6 Stateless Translation ">    
-      <section title="Operations on 4via6 CPE">
-     
-      <t>ISP should assign native IPv6 prefix or IPv6 address to CPE WAN interface.
-      According to mapping rules stated in 4rd, 4via6 CE will derive IPv4 relevant
-      information from IPv6 according to the stateless algorithm. Such IPv4 information
-      could be a IPv4 subnetwork or single IPv4 address or shared IPv4 address with
-      constrained port range. The generated IPv4 address and port range should be
-      applied to CE NAPT44. For user's network, CE will assign private IPv4 address
-      to each host. </t>
-      
-      <t>The below details the traffic processing for outbound and inbound data
-      packages. </t>
-    
-      <t>For outbound traffic operation, 4via6 CE will receive data packages from
-      internal hosts. NAPT44 should translate private IPv4 source address/port into
-      derived IPv4 address/port. CEs NAPT44 function could be modified to operate
-      in a shared address port-constrained NAPT44 mode when shared IPv4 address and
-      port range conveyed as part of an IPv6 address or prefix on CE WAN interface.
-      Before implementing NAT46, CE should match IPv4 destination with pre-configured
-      mapping rules. if IPv4 destination address falls into the domain IPv4 prefix
-      in mapping rules, the stateless algorithm is applied to both source and destination
-      address for generating source and destination IPv6 address. After NAT46 translation,
-      data packages would be directly to transmit to another CE. Otherwise, the stateless
-      algorithm is only applied to source address generation. Regarding to destination
-      address, IPv6 mapping prefix should be concatenated with IPv4 address to form
-      a IPv4-embedded IPv6 address, in which IPv4 address is encoded in positions 96
-      to 127. After NAT46 translation, data packages will be sent BR for subsequential
-      operations. </t> 
-    
-      <t>For inbound traffic operation, 4via6 CE will receive IPv6 data packages from
-      ISP network. CE should match IPv6 source address with pre-configured mapping rules.
-      If IPv6 source address falls into the domain IPv6 prefix in mapping rules, the
-      stateless algorithm is applied to both source and destination address for deriving
-      IPv4 source and destination address. Accomplishing IPv6 to IPv4 translation, CE
-      should be capable of NAPT44 port forwarding to deliver data packages to internal
-      IPv4 hosts. Otherwise, the stateless algorithm is only applied to destination
-      address. Regarding to IPv6 source address, CPE should simply strip IPv6 mapping
-      prefix to extract IPv4 address from positions 96 to 127. Afterwards, CE delivers
-      data packages to internal IPv4 hosts. </t>   
-      </section>
-    
-      <section title="Operations on BR">
-     
-      <t>In order to interconnecting IPv6 network with public IPv4 Internet, BR would take
-      stateless algorithm for translating IPv6 to IPv4. </t>
-    
-      <t>The below details the traffic processing for outbound and inbound data packages. </t> 
-    
-      <t>For outbound traffic operation, 4via6 BR will receive IPv6 data packages from
-      4via6 CE. BR would generate IPv4 address and port range from source IPv6 address
-      automatically. for destination IPv6 address, a IPv6 mapping prefix will be stripped
-      to get out IPv4 address. Both source and destination address is stateless.</t> 
-    
-      <t>For inbound traffic operation, 4via6 BR will receive IPv4 data packages from IPv4
-      Internet. BR should match IPv4 destination with pre-configured mapping rules. if IPv4
-      destination address falls into the domain IPv4 prefix in mapping rules, IPv6 address
-      can be decided from IPv4 address and port statelessly. The source IPv4 address would
-      be concatenated with IPv6 mapping prefix to form a natural IPv6 source address. </t>
-      </section>
-        
-    </section>
-
-    <section anchor="security" title="Security Considerations">
+       <section anchor="security" title="Security Considerations">
       <t>In order to prevent from spoofing attack, the address-consistency of
       the source address of the encapsulating and encapsulated packets must be
       checked upon receiving the packets from a 4rd domain. If the IPv4 source
