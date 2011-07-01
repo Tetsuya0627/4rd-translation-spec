@@ -138,79 +138,33 @@
     </section>
 
     <section title="Terminology">
-      <t><list hangIndent="22" style="hanging">
-	<t hangText="4via6 domain (Domain):">A set of 4via6 CEs or Hosts and BRs
-	connected to the same virtual link. A service provider may
-	deploy 4rd with a single 4via6 domain, or may utilize multiple
-	4via6 domains. Each domain requires a separate 4via6 prefix.</t>
 
-	<t hangText="4via6 Border Relay (BR):">A 4rd-enabled router
-	managed by the service provider at the edge of a 4via6 domain.
-	A Border Relay router has at least an IPv6-enabled interface and an
-	IPv4 interface connected to the native IPv4 network. A 4via6 BR
-	may also be referred to simply as a "BR" within the context of
-	4via6.</t>
+<list
+style="hanging"
+><t
+hangText="Stateless46 domain:"
+>A domain is composed out of an arbitrary number of S46 CE and Gateway nodes that share a mapping relationship between an operator assigned IPv6 prefix and one or more IPv4 subnets along with all the applicable TCP/UDP ports, all mapped into the IPv6 address space. An S46 system can have multiple domains.</t
+><t
+hangText="Stateless46 CE:"
+>A CPE node that implements S46 functionality including NAT44 which is provisioned by means of S46. The device interfaces to the SP network using native IPv6 and provides a NAT44 and IPv4-IPv6 adaptation service to the user.</t
+><t
+hangText="Stateless46 Gateway"
+>A Service Provider node that implements the stateless 46 adaptation functionality for interfacing between the SP’s IPv6 domain and an IPv4 domain in delivering end user IPv4 connectivity beyond the domain. </t
+><t
+hangText="IPv4 Address sharing"
+> The notion of attributing the same IPv4 address by multiple CEs in an S46 domain.</t
+><t
+hangText="Port-set:"
+>A set composed of unique TCP/UDP ports (ranges) associated to a IPv4 address. A single S46 CE is expected to have a single port-set for each IPv4 address.</t
+><t
+hangText="Port-set-id:"
+>A numeric identifier of a given port set that is unique in a given S46 domain. A port-set-id is used to algorithmically determine the port-set members. The port-set-id is conveyed to CEs as part the CE’s IPv6 addressing information, ie it is part of IPv6 subnet or address of a given CE, and its format places no restriction on the use of SLAAC or DHCP addressing.</t
+><t
+hangText="CE-index:"
+>A numeric value, composed of a full or partial IPv4 address and optionally a port-set-id, which uniquely identifies a given CE in an S46 domain.</t
+></list
+>
 
-	<t hangText="4via6 Customer Edge (CE):">A device functioning as
-	a Customer Edge router in a 4via6 deployment. In a residential
-	broadband deployment, this type of device is sometimes
-	referred to as a "Residential Gateway" (RG) or "Customer
-	Premises Equipment" (CPE). A typical 4via6 CE adopting 4rd rules will serve a
-	residential site with one WAN side interface, one or more LAN
-	side interfaces. A 4via6 CE may
-	also be referred to simply as a "CE" within the context of
-	4via6.</t>
-	
-        <t hangText="4via6 Hosts:">A device functioning as
-	a mobile terminal in a 4via6 wireless network deployment. 4via6 hosts will 
-        perform stateless translation based on 4rd algorithm. A 4via6 host has at least
-        an IPv6-enabled interface. An derived IPv4 address might be fed into installed 
-        IPv4 application. A 4via6 host may also be referred to simply as a "Host" within 
-        the context of 4via6.</t>
-
-        <t hangText="4via6 IPv6 prefix:">The IPv6 prefix assigned to a CE or hosts by
-	other means than 4rd itself, and used by 4rd to derive a CE 4rd
-	prefix.</t>
-
-        <t hangText="4via6 IPv6 address:">The IPv6 address given to the
-        CE or hosts as part of normal IPv6 Internet access. This address is
-        used by a CE or hosts to create the 4rd prefix as well as to send
-        and receive IPv6-encapsulated IPv4 packets.</t>
-
-        <t hangText="4rd prefix:">The 4rd prefix of the CE or hosts. It is
-        derived from the CE or hosts IPv6 prefix by a mapping rule according to
-        <xref target="mapping-rules"></xref>. Depending on its length,
-        it is an IPv4 prefix, an IPv4 address, or a shared IPv4
-        address followed by a Port-set ID (<xref
-        target="port-set-id"></xref>).</t>
-
-        <t hangText="Port-set ID:">In a CE 4rd prefix longer than 32
-        bits, bits that follow the first 32.  It algorithmically
-        identifies a set of ports exclusively assigned to the CE. As
-        specified in Section <xref target="port-set-id"></xref>, the set
-        can comprise up to 4 disjoint port ranges.</t>
-
-        <t hangText="Domain IPv6 prefix:">An IPv6 prefix assigned by an ISP to
-	a 4via6 domain.</t>
-
-        <t hangText="Domain IPv4 prefix:">A IPv4 prefix assigned by an
-        ISP to the 4via6 domain.</t>
-
-        <t hangText="IPv4 Embedded Address (EA) bits:">The IPv4
-        EA-bits in the IPv6 address identify an IPv4 prefix, IPv4
-        address or part of IPv4 address and port set.</t>
-
-	<t hangText="Shared IPv4 address:">An IPv4 address that is
-	shared among multiple nodes. Each node has a separate part of
-	the transport layer port space.</t>
-
-         <t hangText="IPv6 mapping prefix :"> An IPv6 mapping prefix should
-         be delivered to 4via6 CEs or hosts for generating IPv6 address by 
-         catenating IPv4 destination address with IPv6 mapping prefix. Such 
-         IPv6 mapping prefix would be either the "Well-Known Prefix" or a 
-         "Network-Specific Prefix" unique to the organization deploying the
-         address translators. It will help to route packages to appropriate BR.</t>
-      </list></t>
     </section>
 
     
