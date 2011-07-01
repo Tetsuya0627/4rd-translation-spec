@@ -447,19 +447,13 @@ hangText="CE-index:"
     </section>
 
        <section anchor="security" title="Security Considerations">
-      <t>In order to prevent from spoofing attack, the address-consistency of
-      the source address of the encapsulating and encapsulated packets must be
-      checked upon receiving the packets from a 4rd domain. If the IPv4 source
-      address in encapsulated IPv4 packet is based on 4rd prefix, IPv4 source
-      address in encapsulated IPv4 packet must be able to be generated from IPv6
-      source address in encapsulating IPv6 packet.  If the IPv4 source address
-      is not based on 4rd prefix, the destination address of the reverse path
-      toward the IPv4 source address in encapsulated IPv4 packet must be same
-      as IPv6 source address in encapsulating IPv6 packet.</t>
+      <t>In order to prevent address spoofing attacks, for a given 4v6 domain, the 4v6 
+      gateway must perform a source IPv6 address and source port consistency check of 
+    received packets.
+      The source and destination IPv6 prefixes must match that configured for the 4v6 
+      domain, and the source port must map to the port-set-id contained in the source
+      IPv6 address</t>
 
-      <t>In order to avoid forwarding loop, both 4rd BR and 4via6 CE must not
-      forward the packets received from a specified 4rd domain to the same
-      4rd domain.</t>
     </section>
 
     <section anchor="iana" title="IANA Consideration">
