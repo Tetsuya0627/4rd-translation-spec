@@ -142,26 +142,26 @@
 <list
 style="hanging"
 ><t
-hangText="Stateless46 domain:"
->A domain is composed out of an arbitrary number of S46 CE and Gateway nodes that share a mapping relationship between an operator assigned IPv6 prefix and one or more IPv4 subnets along with all the applicable TCP/UDP ports, all mapped into the IPv6 address space. An S46 system can have multiple domains.</t
+hangText="Stateless4v6 domain:"
+>A domain is composed out of an arbitrary number of 4v6 CE and Gateway nodes that share a mapping relationship between an operator assigned IPv6 prefix and one or more IPv4 subnets along with all the applicable TCP/UDP ports, all mapped into the IPv6 address space. An S4v6 system can have multiple domains.</t
 ><t
-hangText="Stateless46 CE:"
->A CPE node that implements S46 functionality including NAT44 which is provisioned by means of S46. The device interfaces to the SP network using native IPv6 and provides a NAT44 and IPv4-IPv6 adaptation service to the user.</t
+hangText="Stateless4v6 CE:"
+>A CPE node that implements 4v6 functionality including NAT44 which is provisioned by means of S46. The device interfaces to the SP network using native IPv6 and provides a NAT44 and IPv4-IPv6 adaptation service to the user.</t
 ><t
-hangText="Stateless46 Gateway"
->A Service Provider node that implements the stateless 46 adaptation functionality for interfacing between the SP’s IPv6 domain and an IPv4 domain in delivering end user IPv4 connectivity beyond the domain. </t
+hangText="Stateless4v6 Gateway"
+>A Service Provider node that implements the stateless 4v6 adaptation functionality for interfacing between the SP’s IPv6 domain and an IPv4 domain in delivering end user IPv4 connectivity beyond the domain. </t
 ><t
 hangText="IPv4 Address sharing"
-> The notion of attributing the same IPv4 address by multiple CEs in an S46 domain.</t
+> The notion of attributing the same IPv4 address by multiple CEs in an 4v6 domain.</t
 ><t
 hangText="Port-set:"
->A set composed of unique TCP/UDP ports (ranges) associated to a IPv4 address. A single S46 CE is expected to have a single port-set for each IPv4 address.</t
+>A set composed of unique TCP/UDP ports (ranges) associated to a IPv4 address. A single 4v6 CE is expected to have a single port-set for each IPv4 address.</t
 ><t
 hangText="Port-set-id:"
->A numeric identifier of a given port set that is unique in a given S46 domain. A port-set-id is used to algorithmically determine the port-set members. The port-set-id is conveyed to CEs as part the CE’s IPv6 addressing information, ie it is part of IPv6 subnet or address of a given CE, and its format places no restriction on the use of SLAAC or DHCP addressing.</t
+>A numeric identifier of a given port set that is unique in a given 4v6 domain. A port-set-id is used to algorithmically determine the port-set members. The port-set-id is conveyed to CEs as part the CE’s IPv6 addressing information, ie it is part of IPv6 subnet or address of a given CE, and its format places no restriction on the use of SLAAC or DHCP addressing.</t
 ><t
 hangText="CE-index:"
->A numeric value, composed of a full or partial IPv4 address and optionally a port-set-id, which uniquely identifies a given CE in an S46 domain.</t
+>A numeric value, composed of a full or partial IPv4 address and optionally a port-set-id, which uniquely identifies a given CE in an 4v6 domain.</t
 ></list
 >
 
