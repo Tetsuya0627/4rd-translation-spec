@@ -3,7 +3,7 @@
 # April 2009
 
 REVISION=00
-DRAFT=draft-xxx-softwire-4rd-stateless-transition.txt \
+DRAFT=draft-murakami-softwire-4v6-stateless-translation.txt \
 
 XML2RFC=./xml2rfc/xml2rfc.tcl
 

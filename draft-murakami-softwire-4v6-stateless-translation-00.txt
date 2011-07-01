@@ -1,0 +1,208 @@
+
+
+
+Internet Engineering Task Force                         T. Murakami, Ed.
+Internet-Draft                                               IP Infusion
+Intended status: Standards Track                           S. Matsushima
+Expires: December 3, 2011                                       SoftBank
+                                                                 G. Chen
+                                                                 H. Deng
+                                                            China Mobile
+                                                                  W. Dec
+                                                           Cisco Systems
+                                                               June 2011
+
+
+                      4via6 Stateless Translation
+               draft-murakami-softwire-4v6-translation-00
+
+Abstract
+
+   Regarding IPv4 connectivity across IPv6-only network, IPv4 packets
+   are encapsulated in IPv6 to cross a segment of IPv6-only network.  In
+   some particular network scenarios (i.e., wireless network), its
+   bandwidth is very valuable and scarce resource.  Operators in such a
+   network usually hope to decrease the overhead as much as possible for
+   saving the bandwidth in such a environment.  Key aspects include
+   stateless operations with the algorithmic mapping between IPv4
+   addresses and IPv6 addresses.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on December 3, 2011.
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+
+Murakami, et al.        Expires December 3, 2011                [Page 1]
+
+Internet-Draft         4via6-stateless-translation             June 2011
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . ancho
+   2.  Requirements Language . . . . . . . . . . . . . . . . . . . ancho
+   3.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . ancho
+   4.  4via6 Translation Framework . . . . . . . . . . . . . . . . ancho
+   5.  Stateless Translation Algorithm . . . . . . . . . . . . . . state
+   6.  Behavior of 4via6 Stateless Translation . . . . . . . . . . ancho
+     6.1.  Behavior on 4via6 CE  . . . . . . . . . . . . . . . . . packe
+     6.2.  Behavior on 4via6 BR  . . . . . . . . . . . . . . . . . ancho
+   7.  Path MTU and Fragmentation Consideration  . . . . . . . . . pmtu-
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . secur
+   9.  IANA Consideration  . . . . . . . . . . . . . . . . . . . .  iana
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . ackno
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . ancho
+     11.1. Normative References  . . . . . . . . . . . . . . . . . ancho
+     11.2. Informative References  . . . . . . . . . . . . . . . . ancho
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . .     0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Murakami, et al.        Expires December 3, 2011                [Page 2]
+
+Internet-Draft         4via6-stateless-translation             June 2011
+
+
+1.  Introduction
+
+   During the transition period from only IPv4 to IPv6, service
+   provider's (SP's) infrastructure network will deploy IPv6.  However
+   service provider has not only to offer IPv6 connectivity but also to
+   maintain a residual IPv4 connectivity for outgoing and incoming
+   connections.  For providing IPv4 connectivity across IPv6 network,
+   4rd [I-D.murakami-softwire-4rd] is a stateless solution to allow end-
+   users in IPv4 network to communicate servers located in IPv4 Internet
+   across IPv6 network by encapsulating the packets in IPv6.
+
+   However, this solution is using IPv6 encapsulating mechanism in order
+   to communicate IPv4 islands across IPv6 network.  Hence, the
+   additional IPv6 header is required and the size of the packet is
+   increasing.  If the network has the limited bandwidth like a wireless
+   network, operators are unwilling to use this solution because the
+   additional header might not be preferable.  Meanwhile, the stateless
+   NAT64 is proposed such as [RFC6052] and [RFC6145].
+
+   This solution is using the same algorithmic address mapping rule
+   between IPv4 addresses and IPv6 addresses defined in
+   [I-D.murakami-softwire-4rd] but using the stateless address
+   translation to forward IPv4 packets across IPv6 network similar to
+   the stateless NAT64 defined in [RFC6052] and [RFC6145] in stead of
+   IPv6 encapsulation using in [I-D.murakami-softwire-4rd]
+
+
+2.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
+
+
+3.  Terminology
+
+   4via6 domain (Domain):  A set of 4via6 CEs and BRs connected to the
+                         same virtual link.  A service provider may
+                         deploy 4via6 with a single 4via6 domain, or may
+                         utilize multiple 4via6 domains.  Each domain
+                         requires a separate 4via6 prefix.
+
+   4via6 Border Relay (BR):  A 4via6-enabled router managed by the
+                         service provider at the edge of a 4via6 domain.
+                         A Border Relay router has at least an IPv6-
+                         enabled interface and an IPv4 interface
+                         connected to the native IPv4 network.  A 4via6
+                         BR may also be referred to simply as a "BR"
+
+
+
+Murakami, et al.        Expires December 3, 2011                [Page 3]
+
+Internet-Draft         4via6-stateless-translation             June 2011
+
+
+                         within the context of 4via6.
+
+   4via6 Customer Edge (CE):  A device functioning as a Customer Edge
+                         router in a 4via6 deployment.  In a residential
+                         broadband deployment, this type of device is
+                         sometimes referred to as a "Residential
+                         Gateway" (RG) or "Customer Premises Equipment"
+                         (CPE).  A typical 4via6 CE adopting 4rd rules
+                         will serve a residential site with one WAN side
+                         interface, one or more LAN side interfaces.  A
+                         4via6 CE may also be referred to simply as a
+                         "CE" within the context of 4via6.
+
+   Shared IPv4 address:  An IPv4 address that is shared among multiple
+                         nodes.  Each node has a separate part of the
+                         transport layer port space.
+
+
+4.  4via6 Translation Framework
+
+   Figure 1 depicts the overall architecture with IPv4 users networks
+   connected through routed IPv6 networks.  Therein, IPv4 users are
+   connected to IPv6 network via CPE with 4via6 translation modules.
+
+   >
+          User 1
+       Private IPv4
+      |  Network
+      |
+   O-------------------O
+   |        CPE        |
+   | +-------+-------+ |
+   | | NAT44 | 4via6 | |
+   | |       |  CE   | |\
+   | +-------+-------+ | \    ,-------.                       /------.
+   |                   |  \,-'         `-.                 ,-/       `-.
+   O-------------------O  /   Routed      \   O---------O /   Public    \
