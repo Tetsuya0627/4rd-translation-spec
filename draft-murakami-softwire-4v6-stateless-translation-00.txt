@@ -3,13 +3,13 @@
 
 Internet Engineering Task Force                         T. Murakami, Ed.
 Internet-Draft                                               IP Infusion
-Intended status: Standards Track                                 G. Chen
-Expires: December 3, 2011                                        H. Deng
+Intended status: Standards Track                           S. Matsushima
+Expires: December 3, 2011                               SoftBank Telecom
+                                                                 G. Chen
+                                                                 H. Deng
                                                             China Mobile
                                                                   W. Dec
                                                            Cisco Systems
-                                                           S. Matsushima
-                                                        SoftBank Telecom
                                                                June 2011
 
 
@@ -460,6 +460,15 @@ Authors' Addresses
    Email: tetsuya@ipinfusion.com
 
 
+   Satoru Matsushima
+   SoftBank Telecom
+   1-9-1 Higashi-Shinbashi, Munato-ku
+   Tokyo
+   Japan
+
+   Email: satoru.matsushima@tm.softbank.co.jp
+
+
    Gang Chen
    China Mobile
    53A,Xibianmennei Ave.,
@@ -480,15 +489,6 @@ Authors' Addresses
    Email: denghui02@gmail.com
 
 
-   Wojciech Dec
-   Cisco Systems
-   Haarlerbergpark Haarlerbergweg 13-19
-   Amsterdam, NOORD-HOLLAND  1101 CH
-   Netherlands
-
-   Phone:
-   Email: wdec@cisco.com
-
 
 
 
@@ -505,14 +505,14 @@ Murakami, et al.        Expires December 3, 2011                [Page 9]
 Internet-Draft         4via6-stateless-translation             June 2011
 
 
-   Satoru Matsushima
-   SoftBank Telecom
-   1-9-1 Higashi-Shinbashi, Munato-ku
-   Tokyo
-   Japan
+   Wojciech Dec
+   Cisco Systems
+   Haarlerbergpark Haarlerbergweg 13-19
+   Amsterdam, NOORD-HOLLAND  1101 CH
+   Netherlands
 
-   Email: satoru.matsushima@tm.softbank.co.jp
-
+   Phone:
+   Email: wdec@cisco.com
 
 
 

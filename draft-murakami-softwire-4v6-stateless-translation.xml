@@ -42,21 +42,6 @@
       </address>
     </author>
 
-<<<<<<< HEAD
-    <author fullname="Satoru Matsushima" initials="S." surname="Matsushima">
-      <organization>SoftBank Telecom</organization>
-      <address>
-        <postal>
-          <street>1-9-1 Higashi-Shinbashi, Munato-ku</street>
-          <city>Tokyo</city>
-          <country>Japan</country>
-        </postal>
-        <email>satoru.matsushima@tm.softbank.co.jp</email>
-      </address>
-    </author>
-
-=======
->>>>>>> Revised abstract and introduction.
     <author initials="G. Chen" surname="Chen" fullname="Gang Chen">
       <organization>China Mobile</organization>
       <address>
