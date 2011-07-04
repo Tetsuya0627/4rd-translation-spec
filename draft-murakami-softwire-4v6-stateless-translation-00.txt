@@ -4,13 +4,13 @@
 Internet Engineering Task Force                         T. Murakami, Ed.
 Internet-Draft                                               IP Infusion
 Intended status: Standards Track                                 G. Chen
-Expires: December 3, 2011                                        H. Deng
+Expires: January 5, 2012                                         H. Deng
                                                             China Mobile
                                                                   W. Dec
                                                            Cisco Systems
                                                            S. Matsushima
                                                         SoftBank Telecom
-                                                               June 2011
+                                                            July 4, 2011
 
 
                       4via6 Stateless Translation
@@ -40,7 +40,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 3, 2011.
+   This Internet-Draft will expire on January 5, 2012.
 
 Copyright Notice
 
@@ -52,9 +52,9 @@ Copyright Notice
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 1]
+Murakami, et al.         Expires January 5, 2012                [Page 1]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
    (http://trustee.ietf.org/license-info) in effect on the date of
@@ -108,9 +108,9 @@ Table of Contents
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 2]
+Murakami, et al.         Expires January 5, 2012                [Page 2]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
 1.  Introduction
@@ -164,9 +164,9 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 3]
+Murakami, et al.         Expires January 5, 2012                [Page 3]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
                          (CPE).  A typical 4via6 CE adopting 4rd rules
@@ -220,9 +220,9 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 4]
+Murakami, et al.         Expires January 5, 2012                [Page 4]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
    packets.  When 4via6 CE sends a packet to BR, the source address is
@@ -276,9 +276,9 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 5]
+Murakami, et al.         Expires January 5, 2012                [Page 5]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
    the IPv6 header that is generated from the IPv4 header based on
@@ -332,9 +332,9 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 6]
+Murakami, et al.         Expires January 5, 2012                [Page 6]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
 8.  Comparison with 4rd
@@ -388,9 +388,9 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 7]
+Murakami, et al.         Expires January 5, 2012                [Page 7]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
 12.2.  Informative References
@@ -444,9 +444,9 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 8]
+Murakami, et al.         Expires January 5, 2012                [Page 8]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
 Authors' Addresses
@@ -500,9 +500,9 @@ Authors' Addresses
 
 
 
-Murakami, et al.        Expires December 3, 2011                [Page 9]
+Murakami, et al.         Expires January 5, 2012                [Page 9]
 
-Internet-Draft         4via6-stateless-translation             June 2011
+Internet-Draft         4via6-stateless-translation             July 2011
 
 
    Satoru Matsushima
@@ -556,5 +556,5 @@ Internet-Draft         4via6-stateless-translation             June 2011
 
 
 
-Murakami, et al.        Expires December 3, 2011               [Page 10]
+Murakami, et al.         Expires January 5, 2012               [Page 10]
 
