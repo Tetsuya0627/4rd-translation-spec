@@ -12,6 +12,7 @@
 <!ENTITY RFC6145 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6145.xml">
 <!ENTITY I-D.ietf-softwire-dual-stack-lite SYSTEM 'http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-softwire-dual-stack-lite.xml'>
 <!ENTITY I-D.despres-softwire-sam SYSTEM 'http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-despres-softwire-sam-01.xml'>
+<!ENTITY I-D.operators-softwire-stateless-4v6-motivation SYSTEM 'http://xml.resource.org/public/rfc/bibxml3/reference.I-D.operators-softwire-stateless-4v6-motivation.xml'>
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -42,7 +43,7 @@
     </author>
 
     <author fullname="Satoru Matsushima" initials="S." surname="Matsushima">
-      <organization>SoftBank</organization>
+      <organization>SoftBank Telecom</organization>
       <address>
         <postal>
           <street>1-9-1 Higashi-Shinbashi, Munato-ku</street>
@@ -103,47 +104,36 @@
     <keyword></keyword>
 
     <abstract>
-      <t>Regarding IPv4 connectivity across IPv6-only network, IPv4 packets
-      are encapsulated in IPv6 to cross a segment of IPv6-only network. In
-      some particular network scenarios (i.e., wireless network), its
-      bandwidth is very valuable and scarce resource. Operators in such a
-      network usually hope to decrease the overhead as much as possible for
-      saving the bandwidth in such a environment. Key aspects include stateless
-      operations with the algorithmic mapping between IPv4 addresses and IPv6
-      addresses.</t>
+      <t>This document specify 4via6, a solution for IPv4 connectivity across
+      IPv6 network utilizes 4rd algorithmic address mapping rule as a series
+      of stateless IPv4 over IPv6 migration solutions. 4via6 employ stateless
+      address translation techniques. It is useful for operators who want to
+      provide IPv4 connectivity across restricted bandwidth IPv6 network with
+      stateless operation.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t> During the transition period from only IPv4 to IPv6, service provider's
-      (SP's) infrastructure network will deploy IPv6. However service provider
-      has not only to offer IPv6 connectivity but also to maintain a residual
-      IPv4 connectivity for outgoing and incoming connections. For providing
-      IPv4 connectivity across IPv6 network,
-      <xref target="I-D.murakami-softwire-4rd">4rd</xref> is a stateless solution
-      to allow end-users in IPv4 network to communicate servers located in
-      IPv4 Internet across IPv6 network by encapsulating the packets in IPv6.</t>
-
-      <t>However, this solution is using IPv6 encapsulating mechanism in order
-      to communicate IPv4 islands across IPv6 network. Hence, the additional
-      IPv6 header is required and the size of the packet is increasing. If the
-      network has the limited bandwidth like a wireless network, operators
-      are unwilling to use this solution because the additional header might
-      not be preferable. Meanwhile, the stateless NAT64 is proposed such as
-      <xref target ="RFC6052"> </xref> and
-      <xref target="RFC6145"></xref>.</t>
-
-      <t>This solution is using the same algorithmic address mapping rule
-      between IPv4 addresses and IPv6 addresses defined in 
-      <xref target="I-D.murakami-softwire-4rd"></xref> but using the stateless
-      address translation to forward IPv4 packets across IPv6 network similar
-      to the stateless NAT64 defined in
-      <xref target="RFC6052"></xref> and
-      <xref target="RFC6145"></xref>
-      in stead of IPv6 encapsulation using in
-      <xref target="I-D.murakami-softwire-4rd"></xref></t>
+      <t>4via6 is a solution utilizes the same algorithmic address mapping
+      rule between IPv4 addresses and IPv6 addresses defined in <xref
+      target="I-D.murakami-softwire-4rd">4rd</xref>. 4via6 employ stateless
+      address translation techniques well specified in <xref
+      target="RFC6145"></xref> with the mapping rule in order to communicate
+      IPv4 islands across IPv6 network, instead of IPv6 encapsulation
+      mechanism in 4rd. Address mapping rule defined in <xref
+      target="RFC6052"></xref> is also employed to preserve correspondant
+      address of outside 4via6 domain.</t>
+      
+      <t>Since additional IP header is required and the size of the packet is
+      increasing in encapsulation solutions, limited bandwidth resource in a
+      network would be consumed by un-negligible overhead. It is undesirable
+      in that has that limitation like wireless network. 4via6 is useful for
+      operators who want to provide IPv4 connectivity across restricted
+      bandwidth IPv6 network with stateless operation described in <xref
+      target='I-D.operators-softwire-stateless-4v6-motivation'></xref>.</t>
     </section>
+
 
     <section title="Requirements Language">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -221,7 +211,6 @@
       <figure align="center" anchor="topology" title="Network Topology">
        <preamble></preamble>
        <artwork align="center">><![CDATA[
-       User 1
     Private IPv4
    |  Network
    |
@@ -233,7 +222,7 @@ O-------------------O
 | +-------+-------+ | \    ,-------.                     /------.
 |                   |  \,-'         `-.               ,-/       `-.
 O-------------------O /   Routed      \  O---------O /   Public    \
-                     /    IPv6         \ |Stateless|/     IPv4      \
+                     /    IPv6         \ |         |/     IPv4      \
                     |    Network       --+  4via6  +-   Network     |
                      \                /  |   BR    |\               /
                       \              /   O---------O \             /
@@ -346,7 +335,7 @@ O-------------------O /   Routed      \  O---------O /   Public    \
     </section>
 
     <section anchor="diff-4rd" title="Comparison with 4rd">
-      <t>Differing from tunneling model, translation approach doesn't need to know BR
+      <t>Differing from encapsulation model, translation approach doesn't need to know BR
       IPv6 address. Instead of that, a IPv6 mapping prefix should be delivered to 4via6
       CPEs or 4via6 hosts for generating IPv6 address by catenating IPv4 destination
       address with IPv6 mapping prefix. Such IPv6 mapping prefix shall be either the
@@ -403,6 +392,7 @@ O-------------------O /   Routed      \  O---------O /   Public    \
     <references title="Informative References">
       &I-D.despres-softwire-sam;
       &I-D.ietf-softwire-dual-stack-lite;
+      &I-D.operators-softwire-stateless-4v6-motivation;
       &RFC1918;
       &RFC3513;
       &RFC4787;
