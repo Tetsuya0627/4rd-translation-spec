@@ -96,6 +96,18 @@
       </address>
     </author>
 
+    <author fullname="Kenji Kumaki" initials="K." surname="Kumaki">
+      <organization>KDDI Corporation</organization>
+      <address>
+        <postal>
+          <street>Garden Air Tower 3-10-10, Iidabashi, Chiyoda-ku</street>
+          <city>Tokyo</city>
+          <country>Japan</country>
+        </postal>
+        <email>ke-kumaki@kddi.com</email>
+      </address>
+    </author>
+
     <!--  -->
     <date month="July" year="2011" />
 
@@ -403,6 +415,7 @@ O-------------------O /   Routed      \  O---------O /   Public    \
 <!-- Change Log
 
 v00 2011-06-27  TM	Initial version
+v01 2011-07-20	TM	add a new author
 
 -->
   </back>

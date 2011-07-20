@@ -5898,8 +5898,8 @@ proc pass2end_rfc {elemX} {
         lappend authors [list $block1 $block2]
     }
 
-    if {($options(.STRICT)) && ([set l [llength $authors]] > 5)} {
-        unexpected error "$l authors, maximum of 5 allowed"
+    if {($options(.STRICT)) && ([set l [llength $authors]] > 6)} {
+        unexpected error "$l authors, maximum of 6 allowed"
     }
 
 
