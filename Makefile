@@ -2,7 +2,7 @@
 # Ole Troan, ot@cisco.com
 # April 2009
 
-REVISION=00
+REVISION=01
 DRAFT=draft-murakami-softwire-4v6-stateless-translation.txt \
 
 XML2RFC=./xml2rfc/xml2rfc.tcl
